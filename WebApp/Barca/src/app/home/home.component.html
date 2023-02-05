@@ -1,0 +1,44 @@
+<app-filters></app-filters>
+
+<div class="container">
+    <div class="row">
+        <div class="container main-container">
+            <div class="row text-center" style="margin-top: 10px;">
+                <div *ngFor="let product of products" class="col-md-3" style="padding-bottom: 30px;">
+                    <div class="card h-100">
+                        <a class="text-decoration-none">
+                            <div style="align-content: center;">
+                                <img src="/assets/{{product.img}}" height="164px" width="253px" alt="">
+                            </div>
+                        </a>
+                        <div class="card-body">
+                            <h4 class="card-title">{{product.name | titlecase}}</h4>
+        
+                            <div [ngSwitch]="product.promo">
+                                <div *ngSwitchCase="true">Promoção! 
+                                    <div>
+                                        <h4 class="card-text">De:
+                                            <small><del>{{ product.value | currency:'BRL' }}</del></small>
+                                            Por: {{ product.valPromo | currency:'BRL' }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div *ngSwitchDefault>Por apenas!
+                                    <div>
+                                        <h4 class="card-text">{{ product.value | currency:'BRL' }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="card-footer">
+                            <a class="btn btn-outline-warning">
+                                <span class="fa fa-shopping-cart"></span> Adicionar ao Carrinho
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

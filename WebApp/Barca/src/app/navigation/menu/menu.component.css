@@ -1,0 +1,29 @@
+.header-company{
+    width: 100%;
+    height: 26px;
+    padding: 0;
+    background-color: #f7a951;
+    overflow: hidden;
+}
+
+.menu-links {
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.menu-items{
+    line-height: 25px;
+    font-family: Roboto;
+    color: #363333;
+    font-size: 11.82px !important;
+    font-weight: 400;
+    text-align: left;
+    transform: scaleY(1.0026);
+    text-transform: uppercase;
+    text-decoration: none;
+    font: inherit;
+}
+
+.menu-items:hover{
+    text-decoration: underline;
+}

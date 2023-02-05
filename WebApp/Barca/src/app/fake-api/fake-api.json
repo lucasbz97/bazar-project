@@ -1,0 +1,72 @@
+{
+    "filters": [{
+        "id": 1,
+        "name": "Masculino"
+    }, {
+        "id": 2,
+        "name": "Femínino"
+    }, {
+        "id": 3,
+        "name": "Infantíl"
+    }, {
+        "id": 4,
+        "name": "Utensílios"
+    }],
+    "products": [{
+        "id": 1,
+        "name": "camiseta masc",
+        "value": 15,
+        "promo": true,
+        "valPromo": 10,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 2,
+        "name": "tenis masc",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 3,
+        "name": "tenis fem",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 4,
+        "name": "camisa fem",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 5,
+        "name": "tenis masc",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 6,
+        "name": "tenis masc",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 7,
+        "name": "tenis masc",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }, {
+        "id": 8,
+        "name": "tenis masc",
+        "value": 30.15,
+        "promo": false,
+        "valPromo": 0,
+        "img": "multiplataform.jpg"
+    }]
+}

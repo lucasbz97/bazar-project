@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20230212200249_Mgt2")]
-    partial class Mgt2
+    [Migration("20230218192405_initial")]
+    partial class initial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -25,14 +25,29 @@ namespace Barca.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("Barca.Business.Models.Category", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Category");
+                });
+
             modelBuilder.Entity("Barca.Business.Models.Product", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryID")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryID")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -51,7 +66,25 @@ namespace Barca.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryID");
+
                     b.ToTable("Product");
+                });
+
+            modelBuilder.Entity("Barca.Business.Models.Product", b =>
+                {
+                    b.HasOne("Barca.Business.Models.Category", "Category")
+                        .WithMany("Product")
+                        .HasForeignKey("CategoryID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("Barca.Business.Models.Category", b =>
+                {
+                    b.Navigation("Product");
                 });
 #pragma warning restore 612, 618
         }

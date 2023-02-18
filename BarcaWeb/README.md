@@ -11,3 +11,11 @@ update-database -verbose
 
 Classe Statup não existe no dotnet 6, mas não é como se não pudesse ser recriada mas em roma aja como os romanos então não criei
 
+-----18/02
+executa esse comando no banco "delete from __EFMigrationsHistory;"
+apaga tudo da pasta Migrations
+
+e roda o update
+update-database -verbose
+
+no começo foi apenas um teste... caso tenha feito a parte de cima

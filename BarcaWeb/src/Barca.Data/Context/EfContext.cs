@@ -11,5 +11,7 @@ namespace Dev.Data.Context
         public EfContext(DbContextOptions<EfContext> options) : base(options) { }
 
         public DbSet<Product> Product { get; set; }
+
+        public DbSet<Category> Category { get; set; }
     }
 }

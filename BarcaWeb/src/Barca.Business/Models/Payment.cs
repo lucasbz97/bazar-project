@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Barca.Business.Models.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,13 +7,10 @@ using System.Threading.Tasks;
 
 namespace Barca.Business.Models
 {
-    public class Product: Entity
+    public class Payment: Entity
     {
         public string Name { get; set; }
-        public double Price { get; set; }
         public string Description { get; set; }
-        public Category Category { get; set; }
-        public Guid CategoryID { get; set; }
-        public string Images { get; set; }
+        public TypePayment TypePayment { get; set; }
     }
 }

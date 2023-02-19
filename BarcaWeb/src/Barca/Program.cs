@@ -1,3 +1,9 @@
+using Barca.Business.Interfaces;
+using Barca.Business.Interfaces.IService;
+using Barca.Business.Services;
+using Barca.Data.Repository;
+using Dev.Business.Interfaces;
+using Dev.Business.Notificacoes;
 using Dev.Data.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -13,6 +19,10 @@ builder.Services.AddDbContext<EfContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+builder.Services.AddScoped<INotificador, Notificador>();
+builder.Services.AddScoped<IProductRepository, RepositoryProduct>();
+builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

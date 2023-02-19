@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Dev.Data.Repository
 {
-    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : Dev.Business.Models.Entity, new()
+    public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : Barca.Business.Models.Entity, new()
     {
         protected readonly EfContext Db;
         protected readonly DbSet<TEntity> DbSet;

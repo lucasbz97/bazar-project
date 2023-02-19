@@ -19,3 +19,5 @@ e roda o update
 update-database -verbose
 
 no começo foi apenas um teste... caso tenha feito a parte de cima
+----19/02
+estabelecer modelo de comunicação entre controller e repositorio tendo como base o produto

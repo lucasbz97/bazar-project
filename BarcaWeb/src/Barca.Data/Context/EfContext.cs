@@ -13,5 +13,9 @@ namespace Dev.Data.Context
         public DbSet<Product> Product { get; set; }
 
         public DbSet<Category> Category { get; set; }
+
+        public DbSet<Order> Order { get; set; }
+
+        public DbSet<Sale> Sale { get; set; }
     }
 }

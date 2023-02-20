@@ -42,5 +42,16 @@ namespace Barca.Controllers
 
             return CustomResponse(taskViewModel);
         }
+
+        [HttpPut]
+        public async Task<ActionResult<ProductViewModel>> AtualizarProduto(ProductViewModel taskViewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var task = _mapper.Map<Product>(taskViewModel);
+            await _productService.Atualizar(task);
+
+            return CustomResponse(taskViewModel);
+        }
     }
 }

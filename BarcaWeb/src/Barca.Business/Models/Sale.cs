@@ -13,6 +13,7 @@ namespace Barca.Business.Models
         public DateTime RequestDate { get; set; }
         public DateTime ApproveDate { get; set; }
         public int UserID { get; set; }
-        public Guid ProductID { get; set; }
+        public Guid OrderID { get; set; }
+        public Order Order { get; set; }
     }
 }

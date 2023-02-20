@@ -9,6 +9,8 @@ namespace Barca.Configuration
         public AutomapperConfig()
         {
             CreateMap<Product, ProductViewModel>().ReverseMap();
+            CreateMap<Category, CategoryViewModel>().ReverseMap();
+            CreateMap<Order, OrderViewModel>().ReverseMap();
         }
     }
 }

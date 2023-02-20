@@ -16,5 +16,6 @@ namespace Barca.ViewModels
         public string Description { get; set; }
         public Guid CategoryID { get; set; }
         public string Images { get; set; }
+        public double PricePromo { get; set; }
     }
 }

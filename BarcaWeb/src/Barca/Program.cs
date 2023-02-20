@@ -1,4 +1,5 @@
 using Barca.Business.Interfaces;
+using Barca.Business.Interfaces.IRepository;
 using Barca.Business.Interfaces.IService;
 using Barca.Business.Services;
 using Barca.Data.Repository;
@@ -22,6 +23,10 @@ builder.Services.AddDbContext<EfContext>(options =>
 builder.Services.AddScoped<INotificador, Notificador>();
 builder.Services.AddScoped<IProductRepository, RepositoryProduct>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();

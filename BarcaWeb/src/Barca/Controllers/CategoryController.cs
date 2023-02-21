@@ -34,25 +34,25 @@ namespace Barca.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<CategoryViewModel>> Adicionar(CategoryViewModel taskViewModel)
+        public async Task<ActionResult<CategoryViewModel>> Adicionar(CategoryViewModel categoryViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var task = _mapper.Map<Category>(taskViewModel);
-            await _categoryService.Adicionar(task);
+            var category = _mapper.Map<Category>(categoryViewModel);
+            await _categoryService.Adicionar(category);
 
-            return CustomResponse(taskViewModel);
+            return CustomResponse(categoryViewModel);
         }
 
         [HttpDelete]
-        public async Task<ActionResult<CategoryViewModel>> Deletar(CategoryViewModel taskViewModel)
+        public async Task<ActionResult<CategoryViewModel>> Deletar(CategoryViewModel categoryViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var task = _mapper.Map<Category>(taskViewModel);
-            await _categoryService.Deletar(task);
+            var category = _mapper.Map<Category>(categoryViewModel);
+            await _categoryService.Deletar(category);
 
-            return CustomResponse(taskViewModel);
+            return CustomResponse(categoryViewModel);
         }
     }
 }

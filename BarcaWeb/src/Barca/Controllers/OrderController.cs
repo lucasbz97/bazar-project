@@ -19,7 +19,7 @@ namespace Barca.Controllers
         private readonly IMapper _mapper;
 
         public OrderController(IOrderService orderService, IOrderRepository orderRepository, IMapper mapper, INotificador notificador) : base (notificador) {
-            _orderService = _orderService;
+            _orderService = orderService;
             _orderRepository = orderRepository;
             _mapper = mapper;
         }
@@ -32,14 +32,14 @@ namespace Barca.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<OrderViewModel>> Adicionar(OrderViewModel taskViewModel)
+        public async Task<ActionResult<OrderViewModel>> Adicionar(OrderViewModel orderViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var task = _mapper.Map<Order>(taskViewModel);
-            await _orderService.Adicionar(task);
+            var order = _mapper.Map<Order>(orderViewModel);
+            await _orderService.Adicionar(order);
 
-            return CustomResponse(taskViewModel);
+            return CustomResponse(orderViewModel);
         }
     }
 }

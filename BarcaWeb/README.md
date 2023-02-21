@@ -21,3 +21,10 @@ update-database -verbose
 no começo foi apenas um teste... caso tenha feito a parte de cima
 ----19/02
 estabelecer modelo de comunicação entre controller e repositorio tendo como base o produto
+----21/02
+adicionando outro db context para o Identity
+
+    Add-Migration identity -context ApplicationDbContext
+    update-database -verbose -context ApplicationDbContext
+
+usar o identity para criar o login de usuarios

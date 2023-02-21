@@ -33,25 +33,25 @@ namespace Barca.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<ProductViewModel>> Adicionar(ProductViewModel taskViewModel)
+        public async Task<ActionResult<ProductViewModel>> Adicionar(ProductViewModel productViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var task = _mapper.Map<Product>(taskViewModel);
-            await _productService.Adicionar(task);
+            var products = _mapper.Map<Product>(productViewModel);
+            await _productService.Adicionar(products);
 
-            return CustomResponse(taskViewModel);
+            return CustomResponse(productViewModel);
         }
 
         [HttpPut]
-        public async Task<ActionResult<ProductViewModel>> AtualizarProduto(ProductViewModel taskViewModel)
+        public async Task<ActionResult<ProductViewModel>> AtualizarProduto(ProductViewModel productViewModel)
         {
             if (!ModelState.IsValid) return BadRequest();
 
-            var task = _mapper.Map<Product>(taskViewModel);
-            await _productService.Atualizar(task);
+            var products = _mapper.Map<Product>(productViewModel);
+            await _productService.Atualizar(products);
 
-            return CustomResponse(taskViewModel);
+            return CustomResponse(productViewModel);
         }
     }
 }

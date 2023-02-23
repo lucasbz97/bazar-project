@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace Barca.Business.Interfaces.IService
 {
-    public interface ICategoryService : IDisposable
+    public interface IPaymentService : IDisposable
     {
-        Task Adicionar(Category category);
-        Task Atualizar(Category category);
-        Task Deletar(Category category);
+        Task<dynamic> PayCredit(Payment payment);
     }
 }

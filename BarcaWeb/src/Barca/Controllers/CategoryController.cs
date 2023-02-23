@@ -54,5 +54,16 @@ namespace Barca.Controllers
 
             return CustomResponse(categoryViewModel);
         }
+
+        [HttpPut]
+        public async Task<ActionResult<CategoryViewModel>> Atualizar(CategoryViewModel categoryViewModel)
+        {
+            if (!ModelState.IsValid) return BadRequest();
+
+            var category = _mapper.Map<Category>(categoryViewModel);
+            await _categoryService.Atualizar(category);
+
+            return CustomResponse(categoryViewModel);
+        }
     }
 }

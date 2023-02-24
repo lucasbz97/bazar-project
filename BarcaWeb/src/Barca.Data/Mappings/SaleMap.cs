@@ -17,6 +17,7 @@ namespace Barca.Data.Mappings
 
             builder.Property(x => x.Description).HasColumnType("varchar(200)");
 
+            builder.ToTable("Sale");
         }
     }
 }

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20230220220153_Initial")]
-    partial class Initial
+    [Migration("20230224211816_V3")]
+    partial class V3
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -33,11 +33,36 @@ namespace Barca.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(200)");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category");
+                    b.ToTable("Category", (string)null);
+                });
+
+            modelBuilder.Entity("Barca.Business.Models.Client", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Order", b =>
@@ -47,11 +72,11 @@ namespace Barca.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("ApproveDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<Guid>("PaymentId")
                         .HasColumnType("uniqueidentifier");
@@ -60,10 +85,10 @@ namespace Barca.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("RequestDate")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("datetime");
 
                     b.Property<int>("Status")
-                        .HasColumnType("int");
+                        .HasColumnType("integer");
 
                     b.Property<double>("TotalPrice")
                         .HasColumnType("float");
@@ -77,7 +102,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order");
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Payment", b =>
@@ -113,7 +138,7 @@ namespace Barca.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<string>("Images")
                         .IsRequired()
@@ -121,10 +146,7 @@ namespace Barca.Data.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<double>("Price")
                         .HasColumnType("float");
@@ -133,9 +155,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.HasIndex("OrderId");
-
-                    b.ToTable("Product");
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Sale", b =>
@@ -149,7 +169,7 @@ namespace Barca.Data.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("varchar(200)");
 
                     b.Property<Guid>("OrderID")
                         .HasColumnType("uniqueidentifier");
@@ -167,28 +187,22 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Sale");
+                    b.ToTable("Sale", (string)null);
                 });
 
-            modelBuilder.Entity("Barca.Business.Models.User", b =>
+            modelBuilder.Entity("OrderProduct", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("OrdersId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
+                    b.Property<Guid>("ProductsId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.HasKey("OrdersId", "ProductsId");
 
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
+                    b.HasIndex("ProductsId");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
+                    b.ToTable("OrderProduct");
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Order", b =>
@@ -199,7 +213,7 @@ namespace Barca.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Barca.Business.Models.User", "User")
+                    b.HasOne("Barca.Business.Models.Client", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -218,10 +232,6 @@ namespace Barca.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Barca.Business.Models.Order", null)
-                        .WithMany("Products")
-                        .HasForeignKey("OrderId");
-
                     b.Navigation("Category");
                 });
 
@@ -236,17 +246,27 @@ namespace Barca.Data.Migrations
                     b.Navigation("Order");
                 });
 
+            modelBuilder.Entity("OrderProduct", b =>
+                {
+                    b.HasOne("Barca.Business.Models.Order", null)
+                        .WithMany()
+                        .HasForeignKey("OrdersId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Barca.Business.Models.Product", null)
+                        .WithMany()
+                        .HasForeignKey("ProductsId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Barca.Business.Models.Category", b =>
                 {
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Barca.Business.Models.Order", b =>
-                {
-                    b.Navigation("Products");
-                });
-
-            modelBuilder.Entity("Barca.Business.Models.User", b =>
+            modelBuilder.Entity("Barca.Business.Models.Client", b =>
                 {
                     b.Navigation("Orders");
                 });

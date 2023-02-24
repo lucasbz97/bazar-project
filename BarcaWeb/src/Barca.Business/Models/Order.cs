@@ -13,10 +13,12 @@ namespace Barca.Business.Models
         public DateTime RequestDate { get; set; }
         public DateTime ApproveDate { get; set; }
         public StatusOrder Status { get; set; }
-        public IEnumerable<Product> Products { get; set; }
         public Guid ProductID { get; set; }
-        public User User { get; set; }
+        public Client User { get; set; }
         public double TotalPrice { get; set; }
         public Payment Payment { get; set; }
+
+        //Relacionamento EntityFramework
+        public IEnumerable<Product> Products { get; set; }
     }
 }

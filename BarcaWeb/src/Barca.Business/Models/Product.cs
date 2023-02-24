@@ -14,5 +14,8 @@ namespace Barca.Business.Models
         public Category Category { get; set; }
         public Guid CategoryID { get; set; }
         public string Images { get; set; }
+
+        public IEnumerable<Order> Orders { get; set; }
+
     }
 }

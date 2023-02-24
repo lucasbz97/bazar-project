@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace Barca.Business.Models
 {
-    public class User : Entity
+    public class Client : Entity
     {
         public string Name { get; set; }
+        public string Email { get; set; }
         public DateTime CreateDate { get; set; }
         public DateTime UpdateDate { get; set; }
         public IEnumerable<Order> Orders { get; set; }

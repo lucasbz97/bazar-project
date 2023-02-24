@@ -17,13 +17,15 @@ namespace Barca.Data.Mappings
 
             builder.Property(c => c.Description).HasColumnType("varchar(200)");
 
-            builder.HasOne(p => p.User).WithMany(c => c.Orders).HasForeignKey();
+            builder.HasOne(p => p.User).WithMany(c => c.Orders);
 
             builder.Property(c => c.RequestDate).HasColumnType("datetime");
 
             builder.Property(c => c.ApproveDate).HasColumnType("datetime");
 
             builder.Property(c => (int) c.Status).HasColumnType("integer");
+
+            builder.HasMany(c => c.Products).WithMany(p => p.Orders);
 
             builder.ToTable("Order");
         }

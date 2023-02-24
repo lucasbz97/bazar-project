@@ -15,7 +15,7 @@ namespace Barca.ViewModels
         public DateTime RequestDate { get; set; }
         public DateTime ApproveDate { get; set; }
         public Guid UserID { get; set; }
-        public User User { get; set; }
+        public Client User { get; set; }
             
     }
 }

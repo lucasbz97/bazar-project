@@ -4,6 +4,7 @@ using Dev.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20230224202516_model")]
+    partial class model
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,32 +37,7 @@ namespace Barca.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
-                });
-
-            modelBuilder.Entity("Barca.Business.Models.Client", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Client");
+                    b.ToTable("M_CATEGORY", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Order", b =>
@@ -99,7 +77,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("M_ORDER", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Payment", b =>
@@ -152,7 +130,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("M_PRODUCT", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Sale", b =>
@@ -184,7 +162,28 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Sale", (string)null);
+                    b.ToTable("Sale");
+                });
+
+            modelBuilder.Entity("Barca.Business.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("User");
                 });
 
             modelBuilder.Entity("OrderProduct", b =>
@@ -210,7 +209,7 @@ namespace Barca.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Barca.Business.Models.Client", "User")
+                    b.HasOne("Barca.Business.Models.User", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -263,7 +262,7 @@ namespace Barca.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Barca.Business.Models.Client", b =>
+            modelBuilder.Entity("Barca.Business.Models.User", b =>
                 {
                     b.Navigation("Orders");
                 });

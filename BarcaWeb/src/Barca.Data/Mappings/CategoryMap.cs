@@ -19,7 +19,7 @@ namespace Barca.Data.Mappings
 
             //builder.HasMany(c => c.Product).WithOne(p => p.Category).HasForeignKey(c => c.CategoryID);
 
-            builder.ToTable("M_CATEGORY");
+            builder.ToTable("Category");
         }
     }
 }

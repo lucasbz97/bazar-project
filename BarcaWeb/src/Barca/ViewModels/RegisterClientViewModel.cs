@@ -2,7 +2,7 @@
 
 namespace Barca.ViewModels
 {
-    public class RegisterUserViewModel
+    public class RegisterClientViewModel
     {
         [Required(ErrorMessage = "O campo {0} é obrigatorio")]
         [EmailAddress(ErrorMessage = "O campo {0} esta em formato inválido")]

@@ -3,6 +3,8 @@ using Dev.Business.Interfaces;
 using Dev.Business.Notificacoes;
 using FluentValidation;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.Linq;

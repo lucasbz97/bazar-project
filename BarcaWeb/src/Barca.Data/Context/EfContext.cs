@@ -17,5 +17,14 @@ namespace Dev.Data.Context
         public DbSet<Order> Order { get; set; }
 
         public DbSet<Sale> Sale { get; set; }
+
+        public DbSet<Client> Client { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(EfContext).Assembly);
+
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

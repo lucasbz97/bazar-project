@@ -21,7 +21,7 @@ namespace Dev.Data.Mappings
 
             builder.HasOne(p => p.Category).WithMany(c => c.Product).HasForeignKey(p => p.CategoryID);
 
-            builder.ToTable("M_PRODUCT");
+            builder.ToTable("Product");
         }
     }
 }

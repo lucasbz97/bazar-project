@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230221163323_identity")]
-    partial class identity
+    [Migration("20230224211326_model2")]
+    partial class model2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

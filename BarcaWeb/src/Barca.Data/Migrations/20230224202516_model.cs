@@ -6,21 +6,21 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Barca.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class model : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Category",
+                name: "M_CATEGORY",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "varchar(200)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Category", x => x.Id);
+                    table.PrimaryKey("PK_M_CATEGORY", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -52,14 +52,36 @@ namespace Barca.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Order",
+                name: "M_PRODUCT",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ApproveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "varchar(200)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Description = table.Column<string>(type: "varchar(200)", nullable: false),
+                    CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Images = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_M_PRODUCT", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_M_PRODUCT_M_CATEGORY_CategoryID",
+                        column: x => x.CategoryID,
+                        principalTable: "M_CATEGORY",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "M_ORDER",
+                columns: table => new
+                {
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Description = table.Column<string>(type: "varchar(200)", nullable: false),
+                    RequestDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    ApproveDate = table.Column<DateTime>(type: "datetime", nullable: false),
+                    Status = table.Column<int>(type: "integer", nullable: false),
                     ProductID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     UserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     TotalPrice = table.Column<double>(type: "float", nullable: false),
@@ -67,15 +89,15 @@ namespace Barca.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Order", x => x.Id);
+                    table.PrimaryKey("PK_M_ORDER", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Order_Payment_PaymentId",
+                        name: "FK_M_ORDER_Payment_PaymentId",
                         column: x => x.PaymentId,
                         principalTable: "Payment",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Order_User_UserId",
+                        name: "FK_M_ORDER_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "Id",
@@ -83,31 +105,27 @@ namespace Barca.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "OrderProduct",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Images = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    OrderId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    OrdersId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    ProductsId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
+                    table.PrimaryKey("PK_OrderProduct", x => new { x.OrdersId, x.ProductsId });
                     table.ForeignKey(
-                        name: "FK_Product_Category_CategoryID",
-                        column: x => x.CategoryID,
-                        principalTable: "Category",
+                        name: "FK_OrderProduct_M_ORDER_OrdersId",
+                        column: x => x.OrdersId,
+                        principalTable: "M_ORDER",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Product_Order_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Order",
-                        principalColumn: "Id");
+                        name: "FK_OrderProduct_M_PRODUCT_ProductsId",
+                        column: x => x.ProductsId,
+                        principalTable: "M_PRODUCT",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -115,7 +133,7 @@ namespace Barca.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "varchar(200)", nullable: false),
                     PaymentID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     RequestDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ApproveDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -126,32 +144,32 @@ namespace Barca.Data.Migrations
                 {
                     table.PrimaryKey("PK_Sale", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Sale_Order_OrderID",
+                        name: "FK_Sale_M_ORDER_OrderID",
                         column: x => x.OrderID,
-                        principalTable: "Order",
+                        principalTable: "M_ORDER",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_PaymentId",
-                table: "Order",
+                name: "IX_M_ORDER_PaymentId",
+                table: "M_ORDER",
                 column: "PaymentId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Order_UserId",
-                table: "Order",
+                name: "IX_M_ORDER_UserId",
+                table: "M_ORDER",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_CategoryID",
-                table: "Product",
+                name: "IX_M_PRODUCT_CategoryID",
+                table: "M_PRODUCT",
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Product_OrderId",
-                table: "Product",
-                column: "OrderId");
+                name: "IX_OrderProduct_ProductsId",
+                table: "OrderProduct",
+                column: "ProductsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Sale_OrderID",
@@ -163,16 +181,19 @@ namespace Barca.Data.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Product");
+                name: "OrderProduct");
 
             migrationBuilder.DropTable(
                 name: "Sale");
 
             migrationBuilder.DropTable(
-                name: "Category");
+                name: "M_PRODUCT");
 
             migrationBuilder.DropTable(
-                name: "Order");
+                name: "M_ORDER");
+
+            migrationBuilder.DropTable(
+                name: "M_CATEGORY");
 
             migrationBuilder.DropTable(
                 name: "Payment");

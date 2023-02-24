@@ -4,6 +4,7 @@ using Dev.Data.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    partial class EfContextModelSnapshot : ModelSnapshot
+    [Migration("20230224210936_model2")]
+    partial class model2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -34,7 +37,7 @@ namespace Barca.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Category", (string)null);
+                    b.ToTable("M_CATEGORY", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Client", b =>
@@ -99,7 +102,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Order", (string)null);
+                    b.ToTable("M_ORDER", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Payment", b =>
@@ -152,7 +155,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("Product", (string)null);
+                    b.ToTable("M_PRODUCT", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Sale", b =>
@@ -184,7 +187,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Sale", (string)null);
+                    b.ToTable("Sale");
                 });
 
             modelBuilder.Entity("OrderProduct", b =>

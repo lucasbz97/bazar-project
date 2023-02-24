@@ -1,14 +1,20 @@
 ﻿using ApiMyTask.Controllers;
 using Barca.ViewModels;
 using Dev.Business.Interfaces;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
 namespace Barca.Controllers
 {
     [Route("api")]
     [ApiController]
+    [Authorize]
     public class AuthController : MainController
     {
         private readonly SignInManager<IdentityUser> _signInManager;
@@ -23,7 +29,7 @@ namespace Barca.Controllers
         }
 
         [HttpPost("NewAccount")]
-        public async Task<ActionResult> Registrar(RegisterUserViewModel registerUser)
+        public async Task<ActionResult> Registrar(RegisterClientViewModel registerUser)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
@@ -49,7 +55,7 @@ namespace Barca.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult> Login(LoginUserViewModel loginUser)
+        public async Task<ActionResult> Login(LoginClientViewModel loginUser)
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 

@@ -25,7 +25,7 @@ namespace Barca.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<OrderViewModel>> ObterTodos(User user)
+        public async Task<IEnumerable<OrderViewModel>> ObterTodos(Client user)
         {
             return _mapper.Map<IEnumerable<OrderViewModel>>(await _orderRepository.
                 Buscar(x => x.User.Id == user.Id));

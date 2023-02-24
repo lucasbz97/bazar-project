@@ -40,3 +40,19 @@ eu conheci algumas outros alternativas como a paypal, mas é horrivel, talvez um
 
 em fim se quiser testar tbm pode ir na https://dashboard.stripe.com/ 
 criar a conta e testar, para desenvolvimento é de graça, obviamente não cobra nem deposita nada mas vc conhece a plataforma e os meios
+
+
+----24/03 Sobre importação da autenticação utilizando Google: 
+instalar o pacote do google - package manager: 
+NuGet\Install-Package Microsoft.AspNetCore.Authentication.Google -Version 6.0.6
+
+path: 'C:\projects\Project Git\bazar-project\BarcaWeb\src\Barca'
+rodar o comando dotnet user-secrets init --project <path>
+rodar o comando dotnet user-secrets set "Authentication:Google:ClientId" "33569505883-u4fss4d7mr7oqb3tkh10sjtgjicf6nqq.apps.googleusercontent.com" --project <path>
+dotnet user-secrets set "Authentication:Google:ClientSecret" "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" --project <path>
+
+AddGoogle(googleOptions =>
+{
+    googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
+    googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
+})

@@ -28,3 +28,15 @@ adicionando outro db context para o Identity
     update-database -verbose -context ApplicationDbContext
 
 usar o identity para criar o login de usuarios
+----23/03
+Levantando as necessidades do pagamento via cartão de credito
+criar codigo de exemplo com uma implementação realmente muito simples na "api/order/paymentWish"
+
+o serviço da strippe, bem facil de implementar mas um pouco caro e tem suas observações para funcionamento no brasil
+
+3,99% + R$ 0,39 por cobrança bem-sucedida realizada em cartão esse no plano padrão 
+
+eu conheci algumas outros alternativas como a paypal, mas é horrivel, talvez um mercado pago pode ser bom?
+
+em fim se quiser testar tbm pode ir na https://dashboard.stripe.com/ 
+criar a conta e testar, para desenvolvimento é de graça, obviamente não cobra nem deposita nada mas vc conhece a plataforma e os meios

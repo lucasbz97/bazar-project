@@ -1,22 +1,20 @@
 ﻿using Barca.Business.Models.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace Barca.Business.Models
+namespace Barca.ViewModels
 {
-    public class Payment: Entity
+    public class PaymentViewModel
     {
-        public string Name { get; set; }
+        [Key]
+        public Guid ID { get; set; }
         public string Description { get; set; }
         public TypePayment TypePayment { get; set; }
         public double Amount { get; set; }
         public string CardNumber { get; set; }
-        public string Mounth { get; set; }
-        public string Year { get; set; }
+        public int Mounth { get; set; }
+        public int Year { get; set; }
         public string Cvc { get; set; }
         public string Value { get; set; }
+
     }
 }

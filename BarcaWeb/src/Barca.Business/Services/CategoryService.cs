@@ -38,6 +38,16 @@ namespace Barca.Business.Services
             await _categoryRepository.Delete(category);
         }
 
+        public async Task Atualizar(Category category)
+        {
+            if (!ExecutarValidacao(new CategoryValidations(), category))
+            {
+                return;
+            }
+
+            await _categoryRepository.Update(category);
+        }
+
         public void Dispose()
         {
             throw new NotImplementedException();

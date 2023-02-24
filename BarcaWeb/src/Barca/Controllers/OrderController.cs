@@ -17,11 +17,13 @@ namespace Barca.Controllers
         private readonly IOrderService _orderService;
         private readonly IOrderRepository _orderRepository;
         private readonly IMapper _mapper;
+        private readonly IPaymentService _paymentService;
 
-        public OrderController(IOrderService orderService, IOrderRepository orderRepository, IMapper mapper, INotificador notificador) : base (notificador) {
+        public OrderController(IOrderService orderService, IOrderRepository orderRepository, IPaymentService paymentService, IMapper mapper, INotificador notificador) : base (notificador) {
             _orderService = orderService;
             _orderRepository = orderRepository;
             _mapper = mapper;
+            _paymentService = paymentService;
         }
 
         [HttpGet]
@@ -40,6 +42,24 @@ namespace Barca.Controllers
             await _orderService.Adicionar(order);
 
             return CustomResponse(orderViewModel);
+        }
+
+        [HttpPost]
+        [Route("paymentWish")]
+        public async Task<ActionResult> Adicionar()
+        {
+            Payment payment = new Payment
+            {
+                Amount = 5000,
+                CardNumber = "4242 4242 4242 4242",
+                Mounth = "01",
+                Year = "25",
+                Cvc = "007"
+            };
+
+            string result = await _paymentService.PayCredit(payment);
+
+            return CustomResponse(result);
         }
     }
 }

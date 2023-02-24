@@ -36,6 +36,7 @@ builder.Services.AddScoped<IOrderRepository, OrderRepository>();
 builder.Services.AddScoped<IOrderService, OrderService>();
 builder.Services.AddScoped<IClientRepository, ClientRepository>();
 builder.Services.AddScoped<IClientService, ClientService>();
+builder.Services.AddScoped<IPaymentService, PaymentService>();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -64,15 +65,15 @@ builder.Services.AddAuthentication(x =>
     x.DefaultSignInScheme = "External";
 }).AddJwtBearer(x =>
 {
-    x.RequireHttpsMetadata = false;//padrao é false, mas se só for https pode deixar true
-    x.SaveToken = true;//pra ele salvar o token apos a authenticação, então fica mais facil validar
+    x.RequireHttpsMetadata = false;//padrao ï¿½ false, mas se sï¿½ for https pode deixar true
+    x.SaveToken = true;//pra ele salvar o token apos a authenticaï¿½ï¿½o, entï¿½o fica mais facil validar
     x.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuerSigningKey = true,//diz que ele quer fazer validação da chave
+        ValidateIssuerSigningKey = true,//diz que ele quer fazer validaï¿½ï¿½o da chave
         IssuerSigningKey = new SymmetricSecurityKey(key),//faz a codificacao e passa a chave
         ValidateIssuer = true,//diz tbm que quer validar as outras propriedades e seus valores
         ValidateAudience = true,
-        ValidAudience = appSettings.ValidoEm,//a url da aplicação https:localhost
+        ValidAudience = appSettings.ValidoEm,//a url da aplicaï¿½ï¿½o https:localhost
         ValidIssuer = appSettings.Emissor //MeuSistema
     };
 })

@@ -21,4 +21,10 @@
     <ProjectReference Include="..\Barca.Business\Barca.Business.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<Content Include="ScriptSQL\Products.sql" CopyToPublishDirectory="PreserveNewest" />
+		<!-- CopyToPublishDirectory = { Always, PreserveNewest, Never } -->
+	</ItemGroup>
+
+
 </Project>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20230224202516_model")]
-    partial class model
+    [Migration("20230225190941_mgt2")]
+    partial class mgt2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -37,7 +37,32 @@ namespace Barca.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("M_CATEGORY", (string)null);
+                    b.ToTable("Category", (string)null);
+                });
+
+            modelBuilder.Entity("Barca.Business.Models.Client", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("UpdateDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Client");
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Order", b =>
@@ -77,7 +102,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("M_ORDER", (string)null);
+                    b.ToTable("Order", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Payment", b =>
@@ -86,7 +111,22 @@ namespace Barca.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<double>("Amount")
+                        .HasColumnType("float");
+
+                    b.Property<string>("CardNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Cvc")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Mounth")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -96,6 +136,14 @@ namespace Barca.Data.Migrations
 
                     b.Property<int>("TypePayment")
                         .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Year")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -123,14 +171,14 @@ namespace Barca.Data.Migrations
                         .IsRequired()
                         .HasColumnType("varchar(200)");
 
-                    b.Property<double>("Price")
-                        .HasColumnType("float");
+                    b.Property<decimal>("Price")
+                        .HasColumnType("money");
 
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryID");
 
-                    b.ToTable("M_PRODUCT", (string)null);
+                    b.ToTable("Product", (string)null);
                 });
 
             modelBuilder.Entity("Barca.Business.Models.Sale", b =>
@@ -162,28 +210,7 @@ namespace Barca.Data.Migrations
 
                     b.HasIndex("OrderID");
 
-                    b.ToTable("Sale");
-                });
-
-            modelBuilder.Entity("Barca.Business.Models.User", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("UpdateDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("User");
+                    b.ToTable("Sale", (string)null);
                 });
 
             modelBuilder.Entity("OrderProduct", b =>
@@ -209,7 +236,7 @@ namespace Barca.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Barca.Business.Models.User", "User")
+                    b.HasOne("Barca.Business.Models.Client", "User")
                         .WithMany("Orders")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -262,7 +289,7 @@ namespace Barca.Data.Migrations
                     b.Navigation("Product");
                 });
 
-            modelBuilder.Entity("Barca.Business.Models.User", b =>
+            modelBuilder.Entity("Barca.Business.Models.Client", b =>
                 {
                     b.Navigation("Orders");
                 });

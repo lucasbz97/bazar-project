@@ -17,7 +17,7 @@ namespace Dev.Data.Mappings
 
             builder.Property(p => p.Description).HasColumnType("varchar(200)");
 
-            //builder.Property(p => p.Price).HasColumnType("decimal(20)");
+            builder.Property(p => p.Price).HasColumnType("money");
 
             builder.HasOne(p => p.Category).WithMany(c => c.Product).HasForeignKey(p => p.CategoryID);
 

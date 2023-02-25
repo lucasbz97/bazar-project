@@ -56,3 +56,6 @@ AddGoogle(googleOptions =>
     googleOptions.ClientId = builder.Configuration["Authentication:Google:ClientId"];
     googleOptions.ClientSecret = builder.Configuration["Authentication:Google:ClientSecret"];
 })
+----25/02
+
+boa opção para fazer a carga fria ou cargas frias utilizando migration, ele simplesmente pega um arquivo sql e executa sozinho 

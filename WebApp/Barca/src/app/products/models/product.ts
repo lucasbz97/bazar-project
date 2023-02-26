@@ -1,8 +1,10 @@
 export class Product {
-    id: string = "";
-    name: string = "";
-    value: string = "";
+    Id: string = "";
+    Name: string = "";
+    Price: number = 0;
+    Description: string = "";
+    CategoryID: string = "";
+    PricePromo: string = "";
+    Images: string = "";
     promo: boolean = false;
-    valPromo: string = "";
-    img: string = "";
 }

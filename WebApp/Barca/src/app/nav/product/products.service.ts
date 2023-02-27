@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from "./models/product";
-import{ Constants } from './../../constants';
+import{ Constants } from '../../../constants';
 
 @Injectable()
 export class ProductsService {

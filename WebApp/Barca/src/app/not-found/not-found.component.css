@@ -1,0 +1,15 @@
+.main-box{
+    text-align: center;
+    padding-top: 10em;
+    padding-bottom: 20em;
+    font-style: oblique;
+}
+
+.main-text{
+    font-weight: bold;
+    font-size: 3em;
+}
+
+.secondary-text{
+    font-size: 2em;
+}

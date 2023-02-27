@@ -64,7 +64,7 @@ namespace Barca.Data.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Name = table.Column<string>(type: "varchar(200)", nullable: false),
-                    Price = table.Column<decimal>(type: "DECIMAL(4,2)", nullable: false),
+                    Price = table.Column<decimal>(type: "money", nullable: false),
                     Description = table.Column<string>(type: "varchar(200)", nullable: false),
                     CategoryID = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Images = table.Column<string>(type: "nvarchar(max)", nullable: false)

@@ -1,94 +1,124 @@
-<div class="header-company">
-    <div class="container">
-        <div class="row">
-            <div class="menu-links">
-                <div class="flex">
-                    <a href="" class="menu-items">Sobre</a>&nbsp;
-                    <a href="" class="menu-items">Contato</a>
+<nav class="bg-white border-gray-200 px-2 sm:px-4 py-2.5 rounded dark:bg-gray-900">
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
+        <a href="https://flowbite.com/" class="flex items-center">
+            <img src="../../../assets/brext_logo.png" class="h-6 mr-3 sm:h-20" alt="Flowbite Logo" />
+        </a>
+        <div class="flex md:order-2">
+            <button type="button" data-collapse-toggle="navbar-search" aria-controls="navbar-search"
+                aria-expanded="false"
+                class="md:hidden text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 mr-1">
+                <svg class="w-5 h-5" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                        clip-rule="evenodd"></path>
+                </svg>
+                <span class="sr-only">Search</span>
+            </button>
+            <div class="relative hidden md:block">
+                <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                    <svg class="w-5 h-5 text-orange-500" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd"
+                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                            clip-rule="evenodd"></path>
+                    </svg>
+                    <span class="sr-only">Search icon</span>
                 </div>
-                <div class="flex justify-content-center">
-                    <span class="text">Powered By:</span>&nbsp;
-                    <a href="" class="menu-items">SubDev´s</a>
-                </div>
-                <div class="flex">
-                    <a class="text-reset me-3" href="https://github.com/lucasbz97/bazar-project/blob/master">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
+                <input type="text" id="search-navbar"
+                    class="block w-full p-2 pl-10 text-sm text-orange-500 border border-orange-400 rounded-lg bg-gray-50 focus:ring-orange-500 focus:border-orange-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-orange-500 dark:focus:border-orange-500"
+                    placeholder="Search...">
             </div>
+            <button data-collapse-toggle="navbar-search" type="button"
+                class="inline-flex items-center p-2 text-sm text-orange-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-orange-500 dark:text-orange-400 dark:hover:bg-orange-300 dark:focus:ring-gray-600"
+                aria-controls="navbar-search" aria-expanded="false">
+                <span class="sr-only">Open menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </button>
         </div>
-    </div>
-</div>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container">
-        <div class="row" style="width:100%">
-            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
-                data-mdb-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <i class="fas fa-bars"></i>
+        <div class="flex items-center md:order-2">
+            <button type="button"
+                class="flex mr-3 text-sm h-6 w-6 flex-shrink-0 text-orange-400 group-hover:text-orange-500"
+                id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
+                data-dropdown-placement="bottom">
+                <svg *ngIf="!HasLoggedUser()" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="feather feather-users group-hover:text-orange-600" aria-hidden="true">
+                    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                    <circle cx="9" cy="7" r="4"></circle>
+                    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                </svg>
+                <img *ngIf="HasLoggedUser()" class="w-8 h-8 rounded-full" src="" alt="user photo">
+            </button>
+            <!-- Dropdown menu logged user -->
+            <div *ngIf="HasLoggedUser()"
+                class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                id="user-dropdown">
+                <div class="px-4 py-3">
+                    <span class="block text-sm text-orange-400 dark:text-white">Lucas Teste</span>
+                    <span
+                        class="block text-sm font-medium text-orange-500 truncate dark:text-orange-400">teste@gmail.com</span>
+                </div>
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-orange-400 hover:bg-orange-200 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Meus
+                            Pedidos</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-orange-400 hover:bg-orange-200 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Configurações</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-orange-400 hover:bg-orange-200 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sair</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- Dropdown menu not logged user -->
+            <div *ngIf="!HasLoggedUser()"
+                class="z-50 hidden my-4 text-base list-none bg-white divide-y divide-orange-200 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                id="user-dropdown">
+                <ul class="py-2" aria-labelledby="user-menu-button">
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-orange-400 hover:bg-orange-200 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Entrar</a>
+                    </li>
+                    <li>
+                        <a href="#"
+                            class="block px-4 py-2 text-sm text-orange-400 hover:bg-orange-200 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Registrar-se</a>
+                    </li>
+                </ul>
+            </div>
+            <button data-collapse-toggle="mobile-menu-2" type="button"
+                class="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+                aria-controls="mobile-menu-2" aria-expanded="false">
+                <span class="sr-only">Open main menu</span>
+                <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd"
+                        d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                        clip-rule="evenodd"></path>
+                </svg>
             </button>
 
-            <div class="col-md-4" id="navbarSupportedContent">
-                <a class="navbar-brand mt-2 mt-lg-0" href="#">
-                    <img src="../../../assets/barca-logo.jpg" style="border-radius: 10px;" height="80" alt="Barca Logo"
-                        loading="lazy" />
+            <!-- Cart -->
+            <div class="ml-4 flow-root lg:ml-6">
+                <a href="#" class="group -m-2 flex items-center p-2">
+                    <svg class="h-6 w-6 flex-shrink-0 text-orange-400 group-hover:text-orange-600" fill="none"
+                        viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.75 10.5V6a3.75 3.75 0 10-7.5 0v4.5m11.356-1.993l1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 01-1.12-1.243l1.264-12A1.125 1.125 0 015.513 7.5h12.974c.576 0 1.059.435 1.119 1.007zM8.625 10.5a.375.375 0 11-.75 0 .375.375 0 01.75 0zm7.5 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z" />
+                    </svg>
+                    <span class="ml-2 text-sm font-medium text-orange-400 group-hover:text-orange-600">0</span>
+                    <span class="sr-only">items in cart, view bag</span>
                 </a>
-            </div>
-
-            <div class="col-md-5 d-flex justify-content-center" style="height: 40px;">
-                <form class="d-flex input-group w-auto" style="padding-top: 20px;">
-                    <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" />
-                    <button type="submit" style="border: 0px">
-                        <span class="input-group-text border-0" id="search-addon">
-                            <i class="fas fa-search"></i>
-                        </span>
-                    </button>
-
-                </form>
-            </div>
-
-            <div class="col-md-3 d-flex align-items-center">
-                <!-- Icon -->
-                <a class="text-reset me-3" href="#">
-                    <i class="fa fa-shopping-cart"></i>
-                </a>
-
-                <!-- Avatar -->
-                <!-- se estiver logado -->
-                <div class="dropdown" *ngIf="true">
-                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                        id="dropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" class="rounded-circle" height="25"
-                            alt="Black and White Portrait of a Man" loading="lazy" />
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                        <li>
-                            <a class="dropdown-item" href="#">My profile</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Logout</a>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- deslogado -->
-                <div class="dropdown" *ngIf="false">
-                    <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#"
-                        id="navbarDropdownMenuAvatar" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <i class="fa fa-user"></i>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuAvatar">
-                        <li>
-                            <a class="dropdown-item" href="#">Login</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Registrar-se</a>
-                        </li>
-                    </ul>
-                </div>
             </div>
         </div>
     </div>

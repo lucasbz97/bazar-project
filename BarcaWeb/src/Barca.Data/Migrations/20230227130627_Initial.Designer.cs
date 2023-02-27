@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20230225171651_Initial")]
+    [Migration("20230227130627_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -172,7 +172,7 @@ namespace Barca.Data.Migrations
                         .HasColumnType("varchar(200)");
 
                     b.Property<decimal>("Price")
-                        .HasColumnType("DECIMAL(4,2)");
+                        .HasColumnType("money");
 
                     b.HasKey("Id");
 

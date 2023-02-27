@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthenticationAppComponent } from './nav/authentication/authentication.app.component';
 import { AboutComponent } from './nav/company/about/about.component';
 import { ContactComponent } from './nav/company/contact/contact.component';
 import { HomeComponent } from './nav/home/home.component';
@@ -12,8 +13,13 @@ const routes: Routes = [
     { path: 'contato', component: ContactComponent},
     { path: 'sobre', component: AboutComponent},
     { path: 'products', component: ProductListComponent},
-    {path: '404', component: NotFoundComponent},
-    {path: '**', redirectTo: '/404'}
+    { path: '404', component: NotFoundComponent},
+    {
+        path: '',
+        loadChildren: () =>
+          import('./nav/authentication/authentication.module').then((m) => m.AuthenticationModule),
+    },
+    { path: '**', redirectTo: '/404'}
 ];
 
 @NgModule({

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Filter } from '../filters/models/filter';
+
+import { Product } from '../product/models/product';
+import { ProductsService } from '../product/products.service';
 import { FiltersService } from '../filters/filters.service';
-import { Product } from '../products/models/product';
-import { ProductsService } from '../products/products.service';
 
 @Component({
   selector: 'app-home',

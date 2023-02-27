@@ -19,6 +19,11 @@ const routes: Routes = [
         loadChildren: () =>
           import('./nav/authentication/authentication.module').then((m) => m.AuthenticationModule),
     },
+    {
+      path: '',
+      loadChildren: () =>
+        import('./nav/product/product.module').then((m) => m.ProductModule),
+    },
     { path: '**', redirectTo: '/404'}
 ];
 

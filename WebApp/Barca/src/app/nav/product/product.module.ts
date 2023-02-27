@@ -2,6 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductListComponent } from './product-list/product-list.component';
 import { FiltersComponent } from '../filters/filters.component';
+import { ProductDetailComponent } from './components/product-detail/productDetail.component';
+import { ProductRoutingModule } from './produto.route';
+import { ProdutoAppComponent } from './product.app.component';
 
 
 
@@ -9,12 +12,15 @@ import { FiltersComponent } from '../filters/filters.component';
   declarations: [
     ProductListComponent,
     FiltersComponent,
+    ProductDetailComponent,
+    ProdutoAppComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ProductRoutingModule
   ],
   exports:[
-    ProductListComponent
+    ProductListComponent,
   ]
 })
 export class ProductModule { }

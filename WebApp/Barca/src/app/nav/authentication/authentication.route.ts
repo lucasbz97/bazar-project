@@ -10,6 +10,7 @@ const authenticationRouterConfig: Routes = [
         children:[
             { path: 'login', component: LoginComponent},
             { path: 'sign-up', component: RegisterComponent},
+            { path: '**', redirectTo: '/404'}
         ]
     }
 ];

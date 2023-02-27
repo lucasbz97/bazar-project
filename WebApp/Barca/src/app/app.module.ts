@@ -17,6 +17,8 @@ import { rootRouterConfig } from './config/app-routing.module';
 import { ProductsService } from './products/products.service';
 import { ProductListComponent } from './products/product-list/product-list.component';
 import { FiltersComponent } from './filters/filters.component';
+import { LoginComponent } from './authentication/login/login.component';
+import { RegisterComponent } from './authentication/register/register.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +27,9 @@ import { FiltersComponent } from './filters/filters.component';
     FooterComponent,
     HomeComponent,
     ProductListComponent,
-    FiltersComponent
+    FiltersComponent,
+    LoginComponent,
+    RegisterComponent
   ],
   imports: [
     BrowserModule,

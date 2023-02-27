@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20230225190941_mgt2")]
-    partial class mgt2
+    [Migration("20230227130719_ColdLoad")]
+    partial class ColdLoad
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

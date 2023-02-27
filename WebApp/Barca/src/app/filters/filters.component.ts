@@ -10,7 +10,12 @@ import { FiltersService } from './filters.service';
 export class FiltersComponent implements OnInit {
   constructor(private filtersService: FiltersService ) {}
 
-  public filters: Filter[] = [];
+  public filters: Filter[] = [
+    { 'id': "1", 'name': "Masculino"},
+    { 'id': "2", 'name': "Feminino"},
+    { 'id': "3", 'name': "Infantil"},
+    { 'id': "4", 'name': "Utensilios"},
+  ];
 
   ngOnInit() {
     this.filtersService.getFilters()

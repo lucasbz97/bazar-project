@@ -1,13 +1,13 @@
-<div class="menu-filters">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-sm-9">
-                <ul class="sub-menu-filters list-group list-group-horizontal-md d-flex justify-content-center">
-                    <li class="list-group-item px-3 border-0 rounded-3 list-group-item-secondary mb-2" *ngFor="let filter of filters">
-                        <a href="" class="menu-link"><span class="text">{{ filter.name | titlecase }}</span></a>
+<nav class="bg-orange-500 dark:bg-gray-700">
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
+        <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
+            <div class="flex items-center">
+                <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium" *ngFor="let filter of filters">
+                    <li>
+                        <a href="#" class="text-white dark:text-white hover:underline" aria-current="page">{{ filter.name | titlecase }}</a>
                     </li>
                 </ul>
             </div>
         </div>
     </div>
-</div>
+</nav>

@@ -84,28 +84,30 @@
     <div class="mx-auto max-w-2xl py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
         <div class="controls-carousel grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
             <div *ngFor="let product of (Products); let i = index;" class="max-w-xs rounded-md overflow-hidden shadow-lg hover:scale-105 transition duration-500 cursor-pointer">
-                <div>
-                    <img src="https://media.ldlc.com/r1600/ld/products/00/05/82/02/LD0005820208_1.jpg" alt="" />
-                </div>
-                <div class="py-4 px-4 bg-white">
-                    <h3 class="text-lg font-semibold text-gray-600">{{ product.Name }}</h3>
-                    
-                    <div [ngSwitch]="product.Promo">
-                        <div *ngSwitchCase="true">Promoção! 
-                            <div>
-                                <h4 class="text-lg font-semibold text-gray-600">De:
-                                    <small><del>{{ product.Price | currency:'BRL' }}</del></small>
-                                    Por: {{ product.PricePromo | currency:'BRL' }}
-                                </h4>
+                <a [routerLink]="['/product/edit', 5, 'CELULAR DA SHAMSUMG']">
+                    <div>
+                        <img src="https://media.ldlc.com/r1600/ld/products/00/05/82/02/LD0005820208_1.jpg" alt="" />
+                    </div>
+                    <div class="py-4 px-4 bg-white">
+                        <h3 class="text-lg font-semibold text-gray-600">{{ product.Name }}</h3>
+                        
+                        <div [ngSwitch]="product.Promo">
+                            <div *ngSwitchCase="true">Promoção! 
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-600">De:
+                                        <small><del>{{ product.Price | currency:'BRL' }}</del></small>
+                                        Por: {{ product.PricePromo | currency:'BRL' }}
+                                    </h4>
+                                </div>
                             </div>
-                        </div>
-                        <div *ngSwitchDefault>Por apenas!
-                            <div>
-                                <h4 class="text-lg font-semibold text-gray-600">{{ product.Price | currency:'BRL' }}</h4>
+                            <div *ngSwitchDefault>Por apenas!
+                                <div>
+                                    <h4 class="text-lg font-semibold text-gray-600">{{ product.Price | currency:'BRL' }}</h4>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </div>

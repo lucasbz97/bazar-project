@@ -6,5 +6,5 @@ export class Product {
     CategoryID: string = "";
     PricePromo: string = "";
     Images: string = "";
-    promo: boolean = false;
+    Promo: boolean = false;
 }

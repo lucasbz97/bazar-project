@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
 import { Product } from '../models/product';
 import { ProductsService } from '../products.service';
 
@@ -10,16 +11,32 @@ import { ProductsService } from '../products.service';
 export class ProductListComponent implements OnInit{
   constructor(private productService: ProductsService) {}
 
-  public products: Product[] = [];
+  public productLoaded: boolean = false;
+  public productsBanner: Product [] = [];
+  Products: Observable<Product[]>;
 
   ngOnInit() {
-    this.productService.getProducts()
-      .subscribe(
-        data => {
-          this.products = data;
-          console.log(data);
-        },
-        error => console.log(error)
-      );
+    this.Products = this.productService.getProducts();
+    
+    // this.Products.subscribe(data => {
+    //   this.productsBanner = this.setProductsBanner(data);
+    //   this.productLoaded = true;
+    // }, error => {
+    //   console.log(error);
+    // })
+  }
+
+  setProductsBanner(products: Product[]): Product[] {
+    var aux: Product[] = [];
+    products.forEach((product) => {
+      let prdExists = aux.find((prdAdd) => {
+        return prdAdd.CategoryID == product.CategoryID;
+      });
+
+      if (!prdExists) {
+        aux.push(product);
+      }
+    });
+    return aux;
   }
 }

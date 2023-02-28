@@ -59,7 +59,10 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>()
     .AddErrorDescriber<IdentityMensagensPortugues>()
     .AddDefaultTokenProviders();
 
-//JWT
+builder.Services.AddControllers().AddJsonOptions(jsonOptions =>
+{
+    jsonOptions.JsonSerializerOptions.PropertyNamingPolicy = null;
+});
 var appSettingsSection = builder.Configuration.GetSection("AppSettings");
 builder.Services.Configure<AppSettings>(appSettingsSection);
 

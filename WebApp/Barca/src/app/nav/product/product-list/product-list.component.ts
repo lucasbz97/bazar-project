@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { filter, Observable, of, Subscription } from 'rxjs';
 import { Product } from '../models/product';
 import { ProductsService } from '../products.service';
 
@@ -8,26 +8,29 @@ import { ProductsService } from '../products.service';
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css']
 })
-export class ProductListComponent implements OnInit{
-  constructor(private productService: ProductsService) {}
+export class ProductListComponent implements OnInit {
+  constructor(private productService: ProductsService) { }
+  
+  Products: Product[] = [];
+  ProductSubscription?: Subscription;
+  ProductsBanner: Product[] = [];
 
-  public productLoaded: boolean = false;
-  public productsBanner: Product [] = [];
-  Products: Observable<Product[]>;
+  productObserver = {
+    next: (data: Product[]) => { 
+      this.Products = data; 
+      this.ProductsBanner = this.setProductsBanner(data);
+    },
+    error: (error: any) => { console.log(error) },
+    complete: () => { console.log('product stream completed ') }
+  }
 
   ngOnInit() {
-    this.Products = this.productService.getProducts();
-    
-    // this.Products.subscribe(data => {
-    //   this.productsBanner = this.setProductsBanner(data);
-    //   this.productLoaded = true;
-    // }, error => {
-    //   console.log(error);
-    // })
+    this.ProductSubscription = this.productService.getProducts().subscribe(this.productObserver);
   }
 
   setProductsBanner(products: Product[]): Product[] {
     var aux: Product[] = [];
+
     products.forEach((product) => {
       let prdExists = aux.find((prdAdd) => {
         return prdAdd.CategoryID == product.CategoryID;

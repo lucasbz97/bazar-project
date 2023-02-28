@@ -28,6 +28,10 @@ export class ProductListComponent implements OnInit {
     this.ProductSubscription = this.productService.getProducts().subscribe(this.productObserver);
   }
 
+  trackBannerItem (index:any, item: Product) {
+    return item.Id;
+  }
+
   setProductsBanner(products: Product[]): Product[] {
     var aux: Product[] = [];
 

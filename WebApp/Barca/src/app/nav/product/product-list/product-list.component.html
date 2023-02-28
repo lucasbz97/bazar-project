@@ -54,7 +54,7 @@
         <!-- Carousel wrapper -->
         <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
             <!-- Item 1 --> 
-            <div *ngFor="let item of (ProductsBanner); let i = index" class="hidden duration-700 ease-in-out" data-carousel-item>
+            <div *ngFor="let item of (ProductsBanner); let i = index; trackBy: trackBannerItem " class="hidden duration-700 ease-in-out" data-carousel-item>
                 <span class="absolute top-1/2 left-1/2 text-2xl font-semibold text-black -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800" [innerHTML]="item.Name"></span>
                 <!-- <img 
                     src="/assets/brext_logo.png"

@@ -5,6 +5,7 @@ using Barca.Business.Interfaces.IService;
 using Barca.Business.Models;
 using Barca.ViewModels;
 using Dev.Business.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,7 +25,7 @@ namespace Barca.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet]
+        [HttpGet, Authorize]
         public async Task<IEnumerable<ProductViewModel>> ObterTodos()
         {
             var tasks = _mapper.Map<IEnumerable<ProductViewModel>>(await _productRepository.GetAll());

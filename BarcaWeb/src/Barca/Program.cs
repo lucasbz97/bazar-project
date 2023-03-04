@@ -13,6 +13,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
+using Swashbuckle.AspNetCore.Filters;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,7 +24,18 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("oauth2", new OpenApiSecurityScheme
+    {
+        Description = "Standard authorization header using the bearer schema (\"bearer {token}\")",
+        In = ParameterLocation.Header,
+        Name = "Authorization",
+        Type = SecuritySchemeType.ApiKey
+    });
+
+    options.OperationFilter<SecurityRequirementsOperationFilter>();
+});
 builder.Services.AddDbContext<EfContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
@@ -72,21 +85,18 @@ var key = Encoding.ASCII.GetBytes(appSettings.Secret);
 builder.Services.AddAuthentication(x =>
 {
     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-    x.DefaultScheme = "Application";
-    x.DefaultSignInScheme = "External";
 }).AddJwtBearer(x =>
 {
-    x.RequireHttpsMetadata = false;//padrao � false, mas se s� for https pode deixar true
-    x.SaveToken = true;//pra ele salvar o token apos a authentica��o, ent�o fica mais facil validar
+    x.RequireHttpsMetadata = false;
+    x.SaveToken = true;
     x.TokenValidationParameters = new TokenValidationParameters
     {
-        ValidateIssuerSigningKey = true,//diz que ele quer fazer valida��o da chave
-        IssuerSigningKey = new SymmetricSecurityKey(key),//faz a codificacao e passa a chave
-        ValidateIssuer = true,//diz tbm que quer validar as outras propriedades e seus valores
-        ValidateAudience = true,
-        ValidAudience = appSettings.ValidoEm,//a url da aplica��o https:localhost
-        ValidIssuer = appSettings.Emissor //MeuSistema
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = new SymmetricSecurityKey(key),
+        ValidateIssuer = false,
+        ValidateAudience = false,
+        ValidAudience = appSettings.ValidoEm,
+        ValidIssuer = appSettings.Emissor
     };
 })
 .AddGoogle(googleOptions =>

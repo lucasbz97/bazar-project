@@ -1,5 +1,7 @@
 ﻿using Barca.Business.Interfaces.IRepository;
 using Barca.Business.Interfaces.IService;
+using Barca.Business.Models;
+using Barca.Business.Models.Validations;
 using Dev.Business.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,9 +18,18 @@ namespace Barca.Business.Services
         {
             _clientRepository = clientRepository;
         }
+        public async Task Adicionar(Client client)
+        {
+            if (!ExecutarValidacao(new ClientValidations(), client))
+            {
+                return;
+            }
+
+            await _clientRepository.Add(client);
+        }
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _clientRepository.Dispose();
         }
     }
 }

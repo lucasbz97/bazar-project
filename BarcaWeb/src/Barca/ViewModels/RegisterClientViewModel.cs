@@ -14,5 +14,9 @@ namespace Barca.ViewModels
 
         [Compare("Password", ErrorMessage = "As senhas não conferem")]
         public string ComfirmPassword { get; set; }
+
+        public string UserToken { get; set; }
+
+        public string ClientToken { get; set; }
     }
 }

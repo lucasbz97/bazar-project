@@ -1,11 +1,17 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { RouterModule, Routes, ExtraOptions } from '@angular/router';
 import { AuthenticationAppComponent } from './nav/authentication/authentication.app.component';
 import { AboutComponent } from './nav/company/about/about.component';
 import { ContactComponent } from './nav/company/contact/contact.component';
 import { HomeComponent } from './nav/home/home.component';
 import { NotFoundComponent } from './nav/not-found/not-found.component';
 import { ProductListComponent } from './nav/product/product-list/product-list.component';
+
+const routerOptions: ExtraOptions = {
+  scrollPositionRestoration: "enabled",
+  anchorScrolling: "enabled",
+  scrollOffset: [0, 64]
+};
 
 const routes: Routes = [
     { path: '', redirectTo: '/home', pathMatch: 'full'},
@@ -28,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
+    imports: [RouterModule.forRoot(routes, routerOptions)],
     exports: [RouterModule]
   })
   export class AppRoutingModule { }

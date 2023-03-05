@@ -4,3 +4,14 @@
 @import "tailwindcss/components";
 
 @import "tailwindcss/utilities";
+
+.grid-carousel {
+    width: 100%;
+    overflow: hidden;
+}
+
+.grid-carousel > .carousel-item {
+    display: grid;
+    grid-auto-columns: 25%;
+    grid-auto-flow: column;
+}

@@ -13,7 +13,6 @@ namespace Barca.Data.Migrations
             string sql = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\..\\..\\Barca.Data\\ScriptSQL\\Products.sql");
             string command = File.ReadAllText(@sql);
 
-            migrationBuilder.Sql(command);
         }
 
         /// <inheritdoc />

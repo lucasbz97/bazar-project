@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { filter, Observable, of, Subscription } from 'rxjs';
+import { CategoryService } from '../category.service';
+import { Category } from '../models/category';
 import { Product } from '../models/product';
 import { ProductsService } from '../products.service';
 
@@ -9,8 +11,12 @@ import { ProductsService } from '../products.service';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-  constructor(private productService: ProductsService) { }
+  constructor(private productService: ProductsService, private categoryService: CategoryService) { }
   
+  Categories: Category[] = [];
+  CategorySubscription?: Subscription;
+  
+
   Products: Product[] = [];
   ProductSubscription?: Subscription;
   ProductsBanner: Product[] = [];
@@ -24,11 +30,26 @@ export class ProductListComponent implements OnInit {
     complete: () => { console.log('product stream completed ') }
   }
 
+  categoryObserver = {
+    next: (data: Category[]) => {
+      // this.Categories = [data[0]];
+      // this.Categories[0].Products = [data[0].Products[0]];
+      this.Categories = data;
+    },
+    error: (error: any) => { console.log(error) },
+    complete: () => { console.log('product stream completed ') }
+  }
+
   ngOnInit() {
+    this.CategorySubscription = this.categoryService.getCategoryWithProducts(4).subscribe(this.categoryObserver);
     this.ProductSubscription = this.productService.getProducts().subscribe(this.productObserver);
   }
 
   trackBannerItem (index:any, item: Product) {
+    return item.Id;
+  }
+
+  trackCategoryItem(index:any, item: Category) {
     return item.Id;
   }
 

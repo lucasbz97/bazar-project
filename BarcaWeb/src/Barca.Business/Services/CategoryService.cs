@@ -50,7 +50,7 @@ namespace Barca.Business.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _categoryRepository.Dispose();
         }
     }
 }

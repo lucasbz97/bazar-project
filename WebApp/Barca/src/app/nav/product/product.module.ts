@@ -6,8 +6,6 @@ import { ProductDetailComponent } from './components/product-detail/productDetai
 import { ProductRoutingModule } from './produto.route';
 import { ProdutoAppComponent } from './product.app.component';
 
-
-
 @NgModule({
   declarations: [
     ProductListComponent,

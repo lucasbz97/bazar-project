@@ -12,7 +12,7 @@ namespace Barca.Business.Interfaces.IService
         Task Adicionar(Product product);
 
         Task Atualizar(Product product);
-
+        Task<IEnumerable<object>> ObterProdutosPorCategoria(Guid id);
         Task Remover(Product product);
     }
 }

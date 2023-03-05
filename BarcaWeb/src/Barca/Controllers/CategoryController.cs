@@ -16,12 +16,14 @@ namespace Barca.Controllers
     {
         private readonly ICategoryRepository _categoryRepository;
         private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
         private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryRepository categoryRepository, ICategoryService categoryService, IMapper mapper, INotificador notificador) : base(notificador)
+        public CategoryController(ICategoryRepository categoryRepository, ICategoryService categoryService, IProductService productService, IMapper mapper, INotificador notificador) : base(notificador)
         {
             _categoryRepository = categoryRepository;
             _categoryService = categoryService;
+            _productService = productService;
             _mapper = mapper;
         }
 
@@ -64,6 +66,19 @@ namespace Barca.Controllers
             await _categoryService.Atualizar(category);
 
             return CustomResponse(categoryViewModel);
+        }
+
+        [HttpGet("withProducts")]
+        public async Task<IEnumerable<CategoryViewModel>> GetGetgoryWithProducts()
+        {
+            IEnumerable<CategoryViewModel> task = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryRepository.GetAll());
+
+            foreach (CategoryViewModel category in task)
+            {
+                category.Products = _mapper.Map<IEnumerable<ProductViewModel>>(await _productService.ObterProdutosPorCategoria(category.Id));
+            }
+
+            return task;
         }
     }
 }

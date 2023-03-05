@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Barca.Data.Migrations
 {
     [DbContext(typeof(EfContext))]
-    [Migration("20230227130719_ColdLoad")]
+    [Migration("20230228192755_ColdLoad")]
     partial class ColdLoad
     {
         /// <inheritdoc />

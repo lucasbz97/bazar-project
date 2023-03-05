@@ -3,6 +3,7 @@ using Barca.Business.Interfaces.IService;
 using Barca.Business.Models;
 using Barca.Business.Models.Validations;
 using Dev.Business.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,13 @@ namespace Barca.Business.Services
         public async Task Remover(Product product)
         {
             await _productRepository.Delete(product);
+        }
+
+        public async Task<IEnumerable<object>> ObterProdutosPorCategoria(Guid CategoryId)
+        {
+            var tasks = await _productRepository.Buscar(x => x.CategoryID == CategoryId);
+
+            return tasks;
         }
 
         public void Dispose()

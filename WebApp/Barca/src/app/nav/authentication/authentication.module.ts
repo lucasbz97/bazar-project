@@ -4,6 +4,7 @@ import { AuthenticationRoutingModule } from "./authentication.route";
 import { LoginComponent } from "./login/login.component";
 import { RegisterComponent } from "./register/register.component";
 import { AuthenticationAppComponent } from "./authentication.app.component";
+import { SharedModule } from "../shared/shared.module";
 
 @NgModule({
     declarations: [
@@ -14,6 +15,7 @@ import { AuthenticationAppComponent } from "./authentication.app.component";
     imports: [
         CommonModule,
         AuthenticationRoutingModule,
+        SharedModule
     ],
     exports: []
 })

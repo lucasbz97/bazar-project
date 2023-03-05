@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Barca.Business.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,5 +9,6 @@ namespace Barca.Business.Interfaces.IService
 {
     public interface IClientService : IDisposable
     {
+        Task Adicionar(Client client);
     }
 }

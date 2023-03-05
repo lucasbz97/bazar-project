@@ -8,7 +8,7 @@ import { FiltersService } from './filters.service';
   styleUrls: ['./filters.component.css']
 })
 export class FiltersComponent implements OnInit {
-  constructor(private filtersService: FiltersService ) {}
+  constructor(private filtersService: FiltersService) {}
 
   public filters: Filter[] = [
     { 'id': "1", 'name': "Masculino"},

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Constants } from 'src/constants';
@@ -15,7 +15,7 @@ export class CategoryService {
     return this.http.get<Category[]>(this.UrlServiceV1 + "category");
   }
 
-  getCategoryWithProducts(): Observable<Category[]> {
-    return this.http.get<Category[]>(this.UrlServiceV1 + "category/withProducts");
+  getCategoryWithProducts(limit: number): Observable<Category[]> {
+    return this.http.get<Category[]>(this.UrlServiceV1 + "category/withProducts/" + limit);
   }
 }

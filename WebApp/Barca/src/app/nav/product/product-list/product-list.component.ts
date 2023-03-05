@@ -41,7 +41,7 @@ export class ProductListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.CategorySubscription = this.categoryService.getCategoryWithProducts().subscribe(this.categoryObserver);
+    this.CategorySubscription = this.categoryService.getCategoryWithProducts(4).subscribe(this.categoryObserver);
     this.ProductSubscription = this.productService.getProducts().subscribe(this.productObserver);
   }
 

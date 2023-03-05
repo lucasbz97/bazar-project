@@ -39,11 +39,11 @@ namespace Barca.Business.Services
             await _productRepository.Delete(product);
         }
 
-        public async Task<IEnumerable<object>> ObterProdutosPorCategoria(Guid CategoryId)
+        public async Task<IEnumerable<object>> ObterProdutosPorCategoria(Guid CategoryId, int limit)
         {
             var tasks = await _productRepository.Buscar(x => x.CategoryID == CategoryId);
 
-            return tasks;
+            return limit > 0 ? tasks.Take(limit).ToList() : tasks;
         }
 
         public void Dispose()

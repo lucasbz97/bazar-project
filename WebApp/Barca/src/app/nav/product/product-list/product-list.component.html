@@ -1,18 +1,13 @@
-<app-filters></app-filters>
 
 <div class="mx-auto">
     <div id="default-carousel" class="relative" data-carousel="static">
         <!-- Carousel wrapper -->
         <div class="overflow-hidden relative h-56 sm:h-64 xl:h-80 2xl:h-96">
-            <!-- Item 1 -->
             <div *ngFor="let item of (ProductsBanner); let i = index; trackBy: trackBannerItem "
                 class="hidden duration-700 ease-in-out" data-carousel-item>
-                <span
-                    class="absolute top-1/2 left-1/2 text-2xl font-semibold text-black -translate-x-1/2 -translate-y-1/2 sm:text-3xl dark:text-gray-800"
-                    [innerHTML]="item.Name"></span>
-                <!-- <img 
-                    src="/assets/brext_logo.png"
-                    class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="..."> -->
+                <img 
+                    src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                        class="block absolute top-1/2 left-1/2 w-full -translate-x-1/2 -translate-y-1/2" alt="...">
             </div>
         </div>
         <!-- Slider controls -->
@@ -42,48 +37,63 @@
         </button>
     </div>
 </div>
-<!--  aqui -->
-<div class="container mx-auto" *ngFor="let category of Categories">
-    <h3 class="text-lg font-semibold text-gray-600">{{ category.Name }}</h3>
-    <div class="flex flex-wrap -mx-4">
-        <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4" *ngFor="let product of (category.Products); let i = index;">
-            <a [routerLink]="['/product/detail', product.Id, product.Name]" class="c-card block hover:scale-105 bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
-                <div class="relative pb-48 overflow-hidden">
-                    <img class="absolute inset-0 h-full w-full object-cover"
-                        src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
-                        alt="">
-                </div>
-                <div class="p-4">
-                    <h2 class="mt-2 mb-2  font-bold">{{product.Name}}</h2>
-                    <p class="text-sm">{{product.Description}}.</p>
-                </div>
-                <div class="p-4 border-t border-b text-xs text-gray-700">
-                    <div class="mt-3 flex items-center">
-                        <div [ngSwitch]="product.Promo" class="mx-2">
-                            <div *ngSwitchCase="true">Promoção!
-                                <div>
-                                    <h4 class="text-lg font-semibold text-gray-600">De:
-                                        <small><del>{{ product.Price | currency:'BRL' }}</del></small>
-                                        Por: {{ product.PricePromo | currency:'BRL' }}
-                                    </h4>
-                                </div>
-                            </div>
-                            <div *ngSwitchDefault>Por apenas!
-                                <div>
-                                    <h4 class="text-lg font-semibold text-gray-600">{{ product.Price |
-                                        currency:'BRL' }}</h4>
-                                </div>
-                            </div>
-                        </div>
-                        <a href="#" class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
-                            
-                        </a>
-                    </div>
-                </div>
-            </a>
+<nav class="bg-orange-500 dark:bg-gray-700">
+    <div class="container flex flex-wrap items-center justify-between mx-auto">
+        <div class="max-w-screen-xl px-4 py-3 mx-auto md:px-6">
+            <div class="flex items-center">
+                <ul class="flex flex-row mt-0 mr-6 space-x-8 text-sm font-medium">
+                    <li *ngFor="let category of Categories">
+                        <a  [routerLink]='"."' [fragment]="category.Id" class="text-white dark:text-white hover:underline" aria-current="page">{{ category.Name | titlecase }}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
-        <!-- Criar rota para ir para tela de produtos somente da categoria selecionada -->
-        <a href=""><h3 class="text-sm font-semibold text-orange-500 hover:scale-105">Ver todos</h3></a>
     </div>
-</div>
+</nav>
+<!--  aqui -->
+<section>
+    <div [attr.id]="category.Id" class="section container mx-auto my-4" *ngFor="let category of Categories">
+        <h3 class="text-lg font-semibold text-gray-600">{{ category.Name }}</h3>
+        <div class="flex flex-wrap -mx-4">
+            <div class="w-full sm:w-1/2 md:w-1/2 xl:w-1/4 p-4" *ngFor="let product of (category.Products); let i = index;">
+                <a [routerLink]="['/product/detail', product.Id, product.Name]" class="c-card block hover:scale-105 bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+                    <div class="relative pb-48 overflow-hidden">
+                        <img class="absolute inset-0 h-full w-full object-cover"
+                            src="https://images.unsplash.com/photo-1475855581690-80accde3ae2b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80"
+                            alt="">
+                    </div>
+                    <div class="p-4">
+                        <h2 class="mt-2 mb-2  font-bold">{{product.Name}}</h2>
+                        <p class="text-sm">{{product.Description}}.</p>
+                    </div>
+                    <div class="p-4 border-t border-b text-xs text-gray-700">
+                        <div class="mt-3 flex items-center">
+                            <div [ngSwitch]="product.Promo" class="mx-2">
+                                <div *ngSwitchCase="true">Promoção!
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-600">De:
+                                            <small><del>{{ product.Price | currency:'BRL' }}</del></small>
+                                            Por: {{ product.PricePromo | currency:'BRL' }}
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div *ngSwitchDefault>Por apenas!
+                                    <div>
+                                        <h4 class="text-lg font-semibold text-gray-600">{{ product.Price |
+                                            currency:'BRL' }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="text-white bg-orange-500 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-bag"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+                                
+                            </a>
+                        </div>
+                    </div>
+                </a>
+            </div>
+            <!-- Criar rota para ir para tela de produtos somente da categoria selecionada -->
+            <a href=""><h3 class="text-sm font-semibold text-orange-500 hover:scale-105">Ver todos</h3></a>
+        </div>
+    </div>
+</section>

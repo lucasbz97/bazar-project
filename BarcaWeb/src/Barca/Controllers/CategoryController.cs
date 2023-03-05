@@ -7,6 +7,8 @@ using Barca.Business.Services;
 using Barca.ViewModels;
 using Dev.Business.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System.Drawing.Drawing2D;
+using System.Reflection.Metadata;
 
 namespace Barca.Controllers
 {
@@ -68,14 +70,14 @@ namespace Barca.Controllers
             return CustomResponse(categoryViewModel);
         }
 
-        [HttpGet("withProducts")]
-        public async Task<IEnumerable<CategoryViewModel>> GetGetgoryWithProducts()
+        [HttpGet("withProducts/{limit}")]
+        public async Task<IEnumerable<CategoryViewModel>> GetGetgoryWithProducts([FromRoute] int limit)
         {
             IEnumerable<CategoryViewModel> task = _mapper.Map<IEnumerable<CategoryViewModel>>(await _categoryRepository.GetAll());
 
             foreach (CategoryViewModel category in task)
             {
-                category.Products = _mapper.Map<IEnumerable<ProductViewModel>>(await _productService.ObterProdutosPorCategoria(category.Id));
+                category.Products = _mapper.Map<IEnumerable<ProductViewModel>>(await _productService.ObterProdutosPorCategoria(category.Id, limit));
             }
 
             return task;

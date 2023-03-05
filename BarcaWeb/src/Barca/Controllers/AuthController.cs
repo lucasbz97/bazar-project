@@ -82,13 +82,8 @@ namespace Barca.Controllers
         {
             if (!ModelState.IsValid) return CustomResponse(ModelState);
 
-            var user = new IdentityUser
-            {
-                UserName = loginUser.Email,
-                Email = loginUser.Email,
-                EmailConfirmed = true
-            };
 
+            IdentityUser user = await _userManager.FindByEmailAsync(loginUser.Email);
 
             if (user != null)
             {

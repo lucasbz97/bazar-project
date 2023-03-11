@@ -13,6 +13,7 @@ import { ProductsService } from './nav/product/products.service';
 import { AppRoutingModule } from './app-routing.module';
 import { NavegacaoModule } from './nav/nav.module';
 import { CategoryService } from './nav/product/category.service';
+import { AuthenticationService } from './nav/authentication/authentication.service';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,7 @@ import { CategoryService } from './nav/product/category.service';
     FormsModule,
     NavegacaoModule
   ],
-  providers: [ProductsService, CategoryService,
+  providers: [ProductsService, CategoryService, AuthenticationService,
     {provide: APP_BASE_HREF, useValue: '/'}],
   bootstrap: [AppComponent]
 })

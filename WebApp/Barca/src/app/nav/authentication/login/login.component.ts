@@ -3,6 +3,7 @@ import { FormControlName, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { fromEvent, merge, Observable } from 'rxjs';
 import { ValidationMessages, DisplayMessage, GenericValidator } from '../../shared/generic-forms';
+import { AuthenticationService } from '../authentication.service';
 import { User } from '../models/User';
 
 @Component({
@@ -23,7 +24,15 @@ export class LoginComponent {
   registerFormRender: boolean = false;
 
   user: User = {} as User;
-  constructor(private fb: FormBuilder, private router : Router){
+  loginObserver = {
+    next: (result: any) => {
+      let data : User = result.data;
+      this.setCookie('session-token', data.ClientToken, 1);
+    },
+    error: (error: any) => { console.log(error) },
+  }
+
+  constructor(private fb: FormBuilder, private router : Router, private authenticationService : AuthenticationService){
       this.validationMessages = {
           Email:{
               required: 'O email é requerido',
@@ -35,6 +44,7 @@ export class LoginComponent {
       };
 
       this.genericValidator = new GenericValidator(this.validationMessages);
+
   }
 
   loginForm = this.fb.group({
@@ -59,7 +69,16 @@ export class LoginComponent {
   login(){
     if(this.loginForm.valid){
         Object.assign(this.user, this.loginForm.value);
-        this.router.navigate(['home']);
+        this.authenticationService.DoLogin(this.user).subscribe(this.loginObserver);
+        //this.router.navigate(['home']);
     }
+  }
+
+  private setCookie(name: string, value: string, expireDays: number, path: string = '') {
+    let d:Date = new Date();
+    d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
+    let expires:string = `expires=${d.toUTCString()}`;
+    let cpath:string = path ? `; path=${path}` : '';
+    document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
 }

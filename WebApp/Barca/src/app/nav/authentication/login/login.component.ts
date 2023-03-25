@@ -28,6 +28,8 @@ export class LoginComponent {
     next: (result: any) => {
       let data : User = result.data;
       this.setCookie('session-token', data.ClientToken, 1);
+      this.setCookie('session-user', data.UserId, 1);
+      this.router.navigate(['home']);
     },
     error: (error: any) => { console.log(error) },
   }
@@ -70,7 +72,6 @@ export class LoginComponent {
     if(this.loginForm.valid){
         Object.assign(this.user, this.loginForm.value);
         this.authenticationService.DoLogin(this.user).subscribe(this.loginObserver);
-        //this.router.navigate(['home']);
     }
   }
 

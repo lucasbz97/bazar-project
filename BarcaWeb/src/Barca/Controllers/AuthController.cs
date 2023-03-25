@@ -61,7 +61,7 @@ namespace Barca.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, registerUser.Password);
-            await _clientService.Adicionar(client);
+             await _clientService.Adicionar(client);
 
             if (result.Succeeded)
             {
@@ -113,6 +113,7 @@ namespace Barca.Controllers
                 var jwt = new JwtSecurityTokenHandler().WriteToken(token);
 
                 loginUser.ClientToken = jwt;
+                loginUser.UserId = user.Id;
                 return CustomResponse(loginUser);
             }
 
